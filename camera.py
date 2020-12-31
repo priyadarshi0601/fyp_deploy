@@ -7,6 +7,8 @@ class VideoCamera(object):
         self.stream.stop()
     def get_frame(self):
         image=self.stream.read()
+        print(type(image))
+        
         ret,jepg=cv2.imencode('.jpg',image)
         data=[]
         data.append(jepg.tobytes())
