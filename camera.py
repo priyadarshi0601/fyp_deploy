@@ -9,8 +9,7 @@ from PIL import Image
 from imutils import face_utils 
 import numpy as np 
 import argparse 
-import imutils 
-import dlib 
+import imutils
 import cv2
 import pandas as pd
 from imutils.video import WebcamVideoStream

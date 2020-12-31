@@ -40,6 +40,7 @@ def video_feed():
     cnn_model=keras.models.load_model(r'C:\Users\Priyadarshi 2019\Downloads\1dcnnv2.h5')
     detector = dlib.get_frontal_face_detector()
     predictor=dlib.shape_predictor(r"C:\Users\Priyadarshi 2019\Downloads\shape_predictor_68_face_landmarks.dat")
+    print('pp')
     return Response(gen(VideoCamera(),cnn_model,detector,predictor), mimetype='multipart/x-mixed-replace; boundary=frame')
 if __name__=="__main__":
     app.run(debug=True)
