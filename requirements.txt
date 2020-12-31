@@ -106,8 +106,7 @@ six                 == 1.15.0
 smmap               == 3.0.4                    
 spotipy             == 2.16.1                                 
 streamlit           == 0.73.1                   
-tensorboard         == 2.4.0                    
-tensorboard-plugin-wi==1.7.0                    
+tensorboard         == 2.4.0                                        
 tensorflow          == 2.3.1                    
 tensorflow-estimator== 2.3.0                    
 termcolor           == 1.1.0                    
