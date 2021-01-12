@@ -34,7 +34,6 @@ notebook                 == 6.0.0
 numexpr                  == 2.6.9            
 packaging                == 19.0          
 pandas                   == 0.25.0        
-pandoc                   == 2.7.3         
-pandocfilters            == 1.4.2         
+         
   
         
