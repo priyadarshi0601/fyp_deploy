@@ -14,8 +14,7 @@ import dlib
 from tensorflow.keras import layers
 from PIL import Image
 from imutils import face_utils 
-import numpy as np 
-import argparse 
+import numpy as np  
 import imutils 
 import dlib 
 import pandas as pd
