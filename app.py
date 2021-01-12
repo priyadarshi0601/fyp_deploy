@@ -1,24 +1,14 @@
 import json,time,base64
-#from camera import VideoCamera
-from flask import Flask,render_template,jsonify,Response
-from flask import request
+from flask import Flask,render_template,jsonify,Response,request
 import numpy as np
 from io import BytesIO
 from PIL import Image
 import base64,cv2
-import cv2
-
-import numpy as np
 import keras
 import dlib
 from tensorflow.keras import layers
-from PIL import Image
-from imutils import face_utils 
-import numpy as np  
+from imutils import face_utils,WebcamVideoStream 
 import imutils 
-import dlib 
-import pandas as pd
-from imutils.video import WebcamVideoStream
 
 app=Flask(__name__)
 output=[]
