@@ -31,8 +31,7 @@ tensorboard              == 2.0.1
 tensorflow               == 2.0.0  
 tensorflow-estimator     == 2.3.0
 notebook                 == 6.0.0         
-numexpr                  == 2.6.9           
-numpy                    == 1.16.4 
+numexpr                  == 2.6.9            
 packaging                == 19.0          
 pandas                   == 0.25.0        
 pandoc                   == 2.7.3         
