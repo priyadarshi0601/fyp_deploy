@@ -57,3 +57,5 @@ def video():
         return output 
     except:
         print('KI holo')
+if __name__=="__main__":
+    app.run(debug=True)
