@@ -9,13 +9,13 @@ import dlib
 from tensorflow.keras import layers
 from imutils import face_utils
 import imutils 
-
+import tensorflow as tf
 app=Flask(__name__)
 output=[]
 
 detector=dlib.get_frontal_face_detector()
 predictor=dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
-cnn_model=keras.models.load_model('1dcnnv2.h5',compile=False)
+cnn_model=tf.keras.models.load_model('1dcnnv2.h5',compile=False)
 output=""
 @app.route('/')
 def home():
@@ -58,4 +58,4 @@ def video():
     except:
         print('KI holo')
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
