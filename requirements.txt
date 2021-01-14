@@ -25,6 +25,6 @@ threadpoolctl==2.1.0
 urllib3==1.21.1
 Werkzeug==1.0.1
 keras                    == 2.4.3 
-keras-applications       == 1.1.2          
+keras-preprocessing       ==1.1.2          
 tensorboard              == 2.4.0  
 tensorflow               == 2.3.1  
