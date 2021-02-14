@@ -15,7 +15,7 @@ output=[]
 
 detector=dlib.get_frontal_face_detector()
 predictor=dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
-cnn_model=keras.models.load_model('1dcnnv2.h5',compile=False)
+cnn_model=keras.models.load_model('pp.h5',compile=False)
 output=""
 @app.route('/')
 def home():
