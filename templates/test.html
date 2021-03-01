@@ -95,7 +95,7 @@ body, html {
             console.log("Video element",video.videoHeight,video.videoWidth)
             var data=canvas.toDataURL()
             console.log('Size is',data.length)
-            //$("#canvas").fadeOut(10)
+            $("#canvas").fadeOut(5)
             //console.log(data)
             $.ajax({
                 type: 'POST',

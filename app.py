@@ -54,6 +54,8 @@ def video():
                 t=d[trr.index(max(trr))]
                 print(t)
                 output=t
+            if(t==''):
+                output=''
         return output 
     except:
         print('KI holo')
