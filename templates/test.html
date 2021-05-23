@@ -1,126 +1,171 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<meta charset="utf-8">
-<title>Display Webcam Stream</title>
- 
-<style>
-body, html {
-  height: 100%;
-}
+    <meta charset="utf-8" />
+    <title>Display Webcam Stream</title>
 
-.bg {
-  /* The image used */
-  background-image: url("https://4.bp.blogspot.com/-zO8hwvt7iMk/XAVxt4aoQvI/AAAAAAAAwa4/D5m3ApKkAAABZteHWWv_5uzTn8X7JaDxgCPcBGAYYCw/s1600/7T9364v.gif");
+    <style>
+      body,
+      html {
+        height: 100%;
+      }
 
-  /* Full height */
-  height: 100%;
+      .bg {
+        /* The image used */
+        background-image: url("https://4.bp.blogspot.com/-zO8hwvt7iMk/XAVxt4aoQvI/AAAAAAAAwa4/D5m3ApKkAAABZteHWWv_5uzTn8X7JaDxgCPcBGAYYCw/s1600/7T9364v.gif");
 
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-#container {
-	margin: 0px auto;
-	width: 500px;
-	height: 400px;
-	border: 10px black;
-    text-align: center;
-    background-color: black;
-    border-radius: 10%;
-}
-#container h1{
-    color: chartreuse;
-    font-style: italic;
-}
-#videoElement {
-	width: 400px;
-	height: 300px;
-	border: 10px solid blueviolet;
-}
-.pre{
-    width:100px;
-    height:100px;
-    margin:10px;
-    position: absolute;
-    left: 40%;
-    top: 40px;
-    font-size: 50px;
-    color:aqua;
-}
-#logo{background:url('http://i.imgur.com/sERoJ.png') no-repeat;}
-</style>
-</head>
- 
-<body>
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      #container {
+        margin: 0px auto;
+        width: 500px;
+        height: 400px;
+        border: 10px black;
+        text-align: center;
+        background-color: black;
+        border-radius: 10%;
+      }
+      #container h1 {
+        color: chartreuse;
+        font-style: italic;
+      }
+      #videoElement {
+        width: 400px;
+        height: 300px;
+        border: 10px solid blueviolet;
+      }
+      .pre {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        position: absolute;
+        left: 40%;
+        top: 40px;
+        font-size: 50px;
+        color: aqua;
+      }
+      #logo {
+        background: url("http://i.imgur.com/sERoJ.png") no-repeat;
+      }
+    </style>
+  </head>
+
+  <body>
     <div class="bg">
-<div id="container">
-    <h1>Emotion Detector</h1>
-	<video autoplay="true" id="videoElement">
-         
-    </video>
-    <div class="pre">
-        
+      <div id="container">
+        <h1>Emotion Detector</h1>
+        <video autoplay="true" id="videoElement"></video>
+        <div class="pre"></div>
+        <canvas id="canvas" style="overflow: auto"></canvas>
+      </div>
     </div>
-    <canvas id="canvas" style="overflow:auto"></canvas>
-</div>
-</div>
-<script>
-    var video = document.querySelector("#videoElement");
+    <script>
+      var video = document.querySelector("#videoElement");
 
-    if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-        video.srcObject = stream;
-        var st = document.getElementById('videoElement');
-        //console.log(stream)
-        var canvas = document.getElementById('canvas'); 
-        canvas.width = stream.getVideoTracks()[0].getSettings().width
-        canvas.height = stream.getVideoTracks()[0].getSettings().height;
-        console.log("Canvas width and height are",canvas.width,canvas.height)
-        /*const track = stream.getVideoTracks()[0]
+      if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices
+          .getUserMedia({ video: true })
+          .then(function (stream) {
+            video.srcObject = stream;
+            var st = document.getElementById("videoElement");
+            //console.log(stream)
+            var canvas = document.getElementById("canvas");
+            canvas.width = stream.getVideoTracks()[0].getSettings().width;
+            canvas.height = stream.getVideoTracks()[0].getSettings().height;
+            console.log(
+              "Canvas width and height are",
+              canvas.width,
+              canvas.height
+            );
+            /*const track = stream.getVideoTracks()[0]
         let imageCapture = new ImageCapture(track)
         var img=new Image()
         img.src = URL.createObjectURL(imageCapture)
         console.log(imageCapture)*/
-        //console.log(st)
-        function draw(st,canvas){
-            canvas.getContext('2d').drawImage(st, 0, 0, video.videoWidth, video.videoHeight,200,200,video.videoWidth-200,video.videoHeight-200);
-        }
-        //console.log(canvas)
-        
-        function can(canvas){
-            console.log("Video element",video.videoHeight,video.videoWidth)
-            var data=canvas.toDataURL()
-            console.log('Size is',data.length)
-            $("#canvas").fadeOut(5)
-            //console.log(data)
-            $.ajax({
-                type: 'POST',
-                url: '/',
+            //console.log(st)
+            function draw(st, canvas) {
+              canvas
+                .getContext("2d")
+                .drawImage(
+                  st,
+                  0,
+                  0,
+                  video.videoWidth,
+                  video.videoHeight,
+                  100,
+                  100,
+                  video.videoWidth - 100,
+                  video.videoHeight - 100
+                );
+            }
+            //console.log(canvas)
+            var global_res = "";
+            function can(canvas) {
+              console.log("Video element", video.videoHeight, video.videoWidth);
+              var data = canvas.toDataURL();
+              console.log("Size is", data.length);
+              $("#canvas").fadeOut(5);
+              //console.log(data)
+              $.ajax({
+                type: "POST",
+                url: "/",
                 data: {
-                    imageBase64: data
+                  imageBase64: data,
                 },
-                success: function(response) {
-                $(".pre").html(response);
-                console.log(response)
-          }
-            }).done(function(o) {
-                console.log('saved'); 
-                
-                
-            });
-        }      
-        setInterval(draw,1000,st,canvas)
-        setInterval(can,2000,canvas)
-       
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-}
-</script>
-</body>
+                success: function (response) {
+                  $(".pre").html(response);
+                  console.log(response);
+                  global_res = response;
+                  play(response);
+                },
+              }).done(function (o) {
+                console.log("saved");
+              });
+            }
+            const audioElement = document.createElement("audio");
+            audioElement.autoplay = true;
+            var prev = "";
+            function play(res) {
+              console.log("RES CALLED");
+              console.log(res);
+              var link = "";
+              if (res == "Happiness")
+                link =
+                  "https://mp3ringtonesdownload.net/wp-content/uploads/2020/12/happy-20202-ringtone.mp3";
+              if (res == "Sadness")
+                link =
+                  "https://mp3ringtonesdownload.net/wp-content/uploads/2021/05/bestringtones-net-free-ringtone-download-52.mp3";
+              if (res == "Fear")
+                link =
+                  "https://mp3ringtonesdownload.net/wp-content/uploads/2020/12/fearless-beat-2021-mp3.mp3";
+              if (res == "Neutral")
+                link =
+                  "https://mp3ringtonesdownload.net/wp-content/uploads/2020/02/tik-tok-background-music.mp3";
+              if (res == "Angry")
+                link =
+                  "https://mp3ringtonesdownload.net/wp-content/uploads/2020/12/sholey-instrumental-ringtone-mp3.mp3";
+              if (prev != res) {
+                audioElement.setAttribute("src", link);
+                audioElement.load();
+                audioElement.play();
+                console.log("IS PLAYING");
+              }
+              prev = res;
+            }
+            setInterval(draw, 1000, st, canvas);
+            setInterval(can, 2000, canvas);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    </script>
+  </body>
 </html>
