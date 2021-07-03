@@ -58,6 +58,6 @@ def video():
                 output=''
         return output 
     except:
-        print('KI holo')
+        print('ERROR')
 if __name__=="__main__":
     app.run(host='0.0.0.0',debug=True)
